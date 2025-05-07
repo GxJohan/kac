@@ -3,18 +3,32 @@ package com.example.s3lopez
 import android.os.Bundle
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+
+import android.widget.TextView;
+import android.widget.EditText;
+import android.widget.Button;
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContentView(R.layout.activity_main)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+
+        val valA = findViewById<EditText>(R.id.etValorA)
+        val valB = findViewById<EditText>(R.id.etValorB)
+        val btnMul=findViewById<Button>(R.id.btnCalcular)
+        val tvRes = findViewById<TextView>(R.id.tvResultado)
+
+        btnMul.setOnClickListener {
+            val a = valA.text.toString().trim()
+            val b = valB.text.toString().trim()
+
+            if (a.isNotEmpty() && b.isNotEmpty()){
+                val result = a.toDouble() * b.toDouble()
+                tvRes.text = "Resultado: $result "
+
+            }
         }
+
     }
 }
